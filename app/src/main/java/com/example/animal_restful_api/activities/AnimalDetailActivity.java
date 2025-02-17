@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.animal_restful_api.R;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.graphics.Typeface;
+
 
 public class AnimalDetailActivity extends AppCompatActivity {
 
@@ -17,9 +22,16 @@ public class AnimalDetailActivity extends AppCompatActivity {
     private TextView animalDetailLocationsTextView;
     private TextView animalDetailWeightTextView;
     private TextView animalDetailHeightTextView;
+    private TextView animalDetailLengthTextView;
     private TextView animalDetailDietTextView;
     private TextView animalDetailSloganTextView;
     private TextView animalDetailDescriptionTextView;
+
+    private void setBoldText(TextView textView, String label, String value) {
+        SpannableString spannableString = new SpannableString(label + value);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
         animalDetailLocationsTextView= findViewById(R.id.animalDetailLocationsTextView);
         animalDetailWeightTextView = findViewById(R.id.animalDetailWeightTextView);
         animalDetailHeightTextView = findViewById(R.id.animalDetailHeightTextView);
+        animalDetailLengthTextView = findViewById(R.id.animalDetailLengthTextView);
         animalDetailDietTextView = findViewById(R.id.animalDetailDietTextView);
         animalDetailSloganTextView = findViewById(R.id.animalDetailSloganTextView);
         animalDetailDescriptionTextView = findViewById(R.id.animalDetailDescriptionTextView);
@@ -44,6 +57,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
         String locations = getIntent().getStringExtra("animal_locations");
         String weight = getIntent().getStringExtra("animal_weight");
         String height = getIntent().getStringExtra("animal_height");
+        String length = getIntent().getStringExtra("animal_length");
         String diet = getIntent().getStringExtra("animal_diet");
         String slogan = getIntent().getStringExtra("animal_slogan");
         String description = getIntent().getStringExtra("animal_description");
@@ -54,17 +68,23 @@ public class AnimalDetailActivity extends AppCompatActivity {
         if(height == null){
             height = "No data";
         }
+        if(weight == null){
+            weight = "No data";
+        }
+        if(length == null){
+            weight = "No data";
+        }
 
 
         // הצגת שם החיה
-        animalDetailNameTextView.setText("Name: " + animalName);
-        animalDetailLocationsTextView.setText("Locations: "+locations);
-        animalDetailWeightTextView.setText("Weight: "+weight);
-        animalDetailHeightTextView.setText("Height: "+height);
-        animalDetailDietTextView.setText("Diet: "+diet);
-        animalDetailSloganTextView.setText("Slogan: "+slogan);
-        animalDetailDescriptionTextView.setText("Description: "+description);
-
+        animalDetailNameTextView.setText(animalName);
+        setBoldText(animalDetailLocationsTextView, "Locations: ", locations);
+        setBoldText(animalDetailWeightTextView, "Weight: ", weight);
+        setBoldText(animalDetailHeightTextView, "Height: ", height);
+        setBoldText(animalDetailLengthTextView, "Length: ", length);
+        setBoldText(animalDetailDietTextView, "Diet: ", diet);
+        setBoldText(animalDetailSloganTextView, "Slogan: ", slogan);
+        setBoldText(animalDetailDescriptionTextView, "Description: ", description);
 
 
 

@@ -68,6 +68,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
             intent.putExtra("animal_locations", String.join(", ", animal.getLocations()));
             intent.putExtra("animal_weight", animal.getCharacteristics().get("weight"));
             intent.putExtra("animal_height", animal.getCharacteristics().get("height"));
+            intent.putExtra("animal_length", animal.getCharacteristics().get("length"));
             intent.putExtra("animal_diet", animal.getCharacteristics().get("diet"));
             intent.putExtra("animal_slogan", animal.getCharacteristics().get("slogan"));
             intent.putExtra("animal_description", animal.getDescription());
