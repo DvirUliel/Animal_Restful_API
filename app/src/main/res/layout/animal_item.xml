@@ -3,36 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:background="@android:color/white">
+        android:padding="12dp"
+        android:background="@color/light_gray">
 
-        <!-- תמונת החיה -->
+        <!-- Animal Image -->
         <ImageView
             android:id="@+id/animalImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="false"
-            android:src="@drawable/noimageavailable"/>
+            android:src="@drawable/noimageavailable"
+            android:background="@drawable/rounded_corner"/>
 
-        <!-- שם החיה -->
+        <!-- Animal Name -->
         <TextView
             android:id="@+id/animalTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:padding="8dp"
+            android:padding="10dp"
             android:gravity="center"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/charcoal_gray"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

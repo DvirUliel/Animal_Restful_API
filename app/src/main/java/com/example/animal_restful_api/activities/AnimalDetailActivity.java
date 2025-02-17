@@ -72,7 +72,7 @@ public class AnimalDetailActivity extends AppCompatActivity {
             weight = "No data";
         }
         if(length == null){
-            weight = "No data";
+            length = "No data";
         }
 
 
