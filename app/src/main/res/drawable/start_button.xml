@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Normal State -->
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!-- Gradient Background (Green to Light Green) -->
+            <gradient
+                android:angle="45"
+                android:startColor="#4CAF50"
+                android:endColor="#81C784"
+                android:type="linear"/>
+
+            <!-- Border (Dark Green) -->
+            <stroke android:width="2dp" android:color="#388E3C"/>
+
+            <!-- Rounded Corners -->
+            <corners android:radius="20dp"/>
+
+            <!-- Padding -->
+            <padding android:left="16dp" android:right="16dp"/>
+        </shape>
+    </item>
+
+    <!-- Pressed State -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- Gradient Background (Darker Green) -->
+            <gradient
+                android:angle="45"
+                android:startColor="#388E3C"
+                android:endColor="#66BB6A"
+                android:type="linear"/>
+
+            <!-- Border (Darker Border Color) -->
+            <stroke android:width="2dp" android:color="#2C6A2F"/>
+
+            <!-- Rounded Corners -->
+            <corners android:radius="20dp"/>
+
+            <!-- Padding -->
+            <padding android:left="16dp" android:right="16dp"/>
+        </shape>
+    </item>
+</selector>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/gradient_background"
@@ -21,23 +21,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to Animal Finder"
-        android:textSize="26sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:paddingBottom="30dp"
-        android:textColor="@color/white"
-        android:fontFamily="sans-serif-medium"
+        android:textColor="#333333"
+        android:fontFamily="@font/dancing_script"
         android:textAlignment="center"/>
 
     <!-- A brief description about the app -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find and learn about animals in an easy and fun way."
+        android:text="Discover and explore animals easily."
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="#333333"
         android:paddingBottom="40dp"
         android:textAlignment="center"
-        android:lineSpacingExtra="8dp"/>
+        android:lineSpacingExtra="8dp"
+        android:fontFamily="@font/lora"
+        android:textStyle="italic"/>
 
     <!-- Get Started button with rounded corners and shadow -->
     <androidx.appcompat.widget.AppCompatButton
@@ -47,23 +49,12 @@
         android:text="Get Started"
         android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:background="@drawable/button_border"
+        android:background="@drawable/start_button"
         android:layout_marginTop="20dp"
         android:paddingHorizontal="32dp"
         android:paddingVertical="14dp"
-        android:elevation="4dp"/>
+        android:elevation="4dp"
+        android:stateListAnimator="@animator/hover_effect"/>
 
-    <!-- Optional: Additional Text or Link (e.g. "Sign Up" or "Learn More") -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:paddingTop="20dp"
-        android:textAlignment="center"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingBottom="10dp"/>
 
 </LinearLayout>

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="12dp"
-        android:background="@color/light_gray">
+        android:background="#C69C6D">
 
         <!-- Animal Image -->
         <ImageView
@@ -34,7 +34,7 @@
             android:textStyle="bold"
             android:padding="10dp"
             android:gravity="center"
-            android:textColor="@color/charcoal_gray"/>
+            android:textColor="#FAF3E0"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

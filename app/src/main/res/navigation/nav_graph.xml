@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragmentEn">
+    <fragment
+        android:id="@+id/homeFragmentEn"
+        android:name="com.example.animal_restful_api.fragmentsEN.HomeFragmentEn"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_en">
+        <action
+            android:id="@+id/action_homeFragmentEn_to_searchFragmentEn"
+            app:destination="@id/searchFragmentEn" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragmentEn"
+        android:name="com.example.animal_restful_api.fragmentsEN.SearchFragmentEn"
+        android:label="Search Fragment"
+        tools:layout="@layout/fragment_search_en" >
+        <action
+            android:id="@+id/action_searchFragmentEn_to_animalDetailsFragmentEn"
+            app:destination="@id/animalDetailsFragmentEn" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/animalDetailsFragmentEn"
+        android:name="com.example.animal_restful_api.fragmentsEN.AnimalDetailsFragmentEn"
+        android:label="Animal Details Fragment"
+        tools:layout="@layout/fragment_animal_details_en" />
+
+</navigation>

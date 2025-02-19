@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Normal State -->
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <!-- Gradient Background (Dark Teal to Light Teal) -->
+            <gradient
+                android:angle="45"
+                android:startColor="#00695C"
+                android:endColor="#4DB6AC"
+                android:type="linear"/>
+
+            <!-- Border (Dark Teal) -->
+            <stroke android:width="2dp" android:color="#004D40"/> <!-- Dark Teal border color -->
+
+            <!-- Rounded Corners -->
+            <corners android:radius="20dp"/>
+
+            <!-- Padding -->
+            <padding android:left="16dp" android:right="16dp"/>
+        </shape>
+    </item>
+
+    <!-- Pressed State -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!-- Gradient Background (Darker Teal) -->
+            <gradient
+                android:angle="45"
+                android:startColor="#004D40"
+                android:endColor="#80CBC4"
+                android:type="linear"/>
+
+            <!-- Border (Darker Teal) -->
+            <stroke android:width="2dp" android:color="#003D33"/> <!-- Darker Teal border color -->
+
+            <!-- Rounded Corners -->
+            <corners android:radius="20dp"/>
+
+            <!-- Padding -->
+            <padding android:left="16dp" android:right="16dp"/>
+        </shape>
+    </item>
+</selector>
