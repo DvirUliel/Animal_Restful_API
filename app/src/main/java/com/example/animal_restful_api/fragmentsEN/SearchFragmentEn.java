@@ -1,7 +1,6 @@
 package com.example.animal_restful_api.fragmentsEN;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.animal_restful_api.R;
-import com.example.animal_restful_api.adapters.AnimalAdapter;
+import com.example.animal_restful_api.adapters.AnimalAdapterEn;
 import com.example.animal_restful_api.api.ApiService;
 import com.example.animal_restful_api.api.RetrofitClient;
-import com.example.animal_restful_api.models.Animal;
+import com.example.animal_restful_api.models.AnimalEn;
 import com.example.animal_restful_api.viewmodel.SearchViewModel;
 
 import retrofit2.Call;
@@ -31,7 +30,7 @@ import java.util.List;
 
 public class SearchFragmentEn extends Fragment {
     private RecyclerView recyclerView;
-    private AnimalAdapter animalAdapter;
+    private AnimalAdapterEn animalAdapter;
     private EditText searchEditText;
     private Button searchButton;
     private SearchViewModel searchViewModel;
@@ -65,7 +64,7 @@ public class SearchFragmentEn extends Fragment {
         // Observe changes in the animal list
         searchViewModel.getAnimalList().observe(getViewLifecycleOwner(), animals -> {
             if (animals != null && !animals.isEmpty()) {
-                animalAdapter = new AnimalAdapter(animals, animal -> {
+                animalAdapter = new AnimalAdapterEn(animals, animal -> {
                     // Navigate to AnimalDetailsFragment
                     Bundle bundle = new Bundle();
                     bundle.putString("animal_name", animal.getName());
@@ -77,6 +76,7 @@ public class SearchFragmentEn extends Fragment {
                     bundle.putString("animal_diet", animal.getCharacteristics().get("diet"));
                     bundle.putString("animal_slogan", animal.getCharacteristics().get("slogan"));
                     bundle.putString("animal_description", animal.getDescription());
+                    bundle.putString("animal_url", animal.getPageUrl());
                     NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
                     navController.navigate(R.id.action_searchFragmentEn_to_animalDetailsFragmentEn, bundle);
                 });
@@ -99,11 +99,11 @@ public class SearchFragmentEn extends Fragment {
     private void fetchAnimalData(String animalName) {
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         String query = animalName.trim().toLowerCase();
-        Call<List<Animal>> call = apiService.getAnimal(query);
+        Call<List<AnimalEn>> call = apiService.getAnimal(query);
 
-        call.enqueue(new Callback<List<Animal>>() {
+        call.enqueue(new Callback<List<AnimalEn>>() {
             @Override
-            public void onResponse(Call<List<Animal>> call, Response<List<Animal>> response) {
+            public void onResponse(Call<List<AnimalEn>> call, Response<List<AnimalEn>> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     searchViewModel.setAnimalList(response.body());
                 } else {
@@ -112,7 +112,7 @@ public class SearchFragmentEn extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Animal>> call, Throwable t) {
+            public void onFailure(Call<List<AnimalEn>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to load animal data", Toast.LENGTH_SHORT).show();
             }
         });

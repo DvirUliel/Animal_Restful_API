@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.animal_restful_api.R;
-import com.example.animal_restful_api.models.Animal;
+import com.example.animal_restful_api.models.AnimalEn;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -20,16 +20,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> {
-    private List<Animal> animalList;
+public class AnimalAdapterEn extends RecyclerView.Adapter<AnimalAdapterEn.AnimalViewHolder> {
+    private List<AnimalEn> animalList;
     private OnItemClickListener clickListener;
     private String lastAnimalInfo = "";
 
     public interface OnItemClickListener {
-        void onItemClick(Animal animal);
+        void onItemClick(AnimalEn animal);
     }
 
-    public AnimalAdapter(List<Animal> animalList, OnItemClickListener clickListener) {
+    public AnimalAdapterEn(List<AnimalEn> animalList, OnItemClickListener clickListener) {
         this.animalList = animalList;
         this.clickListener = clickListener;
     }
@@ -47,13 +47,13 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder holder, int position) {
-        Animal animal = animalList.get(position);
+        AnimalEn animal = animalList.get(position);
 
         String info = "Name: " + animal.getName() + "\nLocation: " + String.join(", ", animal.getLocations());
         holder.animalTextView.setText(info);
         lastAnimalInfo = info;
 
-        fetchWikipediaImage(animal, holder.animalImageView);
+        fetchWikipediaData(animal, holder.animalImageView);
 
         holder.itemView.setOnClickListener(v -> {
             if (clickListener != null) {
@@ -78,14 +78,11 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         }
     }
 
-    private void fetchWikipediaImage(Animal animal, ImageView imageView) {
+    private void fetchWikipediaData(AnimalEn animal, ImageView imageView) {
         OkHttpClient client = new OkHttpClient();
         String url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + animal.getName().replace(" ", "_");
 
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
+        Request request = new Request.Builder().url(url).get().build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -102,6 +99,10 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
                         if (jsonObject.has("extract")) {
                             String description = jsonObject.getString("extract");
                             animal.setDescription(description);
+                        }
+                        if (jsonObject.has("content_urls")) {
+                            String pageUrl = jsonObject.getJSONObject("content_urls").getJSONObject("mobile").getString("page");
+                            animal.setPageUrl(pageUrl);
                         }
                         if (jsonObject.has("thumbnail")) {
                             String imageUrl = jsonObject.getJSONObject("thumbnail").getString("source");

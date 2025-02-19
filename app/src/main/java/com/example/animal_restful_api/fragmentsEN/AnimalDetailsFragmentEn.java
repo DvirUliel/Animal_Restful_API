@@ -1,9 +1,13 @@
 package com.example.animal_restful_api.fragmentsEN;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -27,6 +31,7 @@ public class AnimalDetailsFragmentEn extends Fragment {
     private TextView animalDetailDietTextView;
     private TextView animalDetailSloganTextView;
     private TextView animalDetailDescriptionTextView;
+    private TextView animalDetailUrlTextView;
 
     @Nullable
     @Override
@@ -47,6 +52,7 @@ public class AnimalDetailsFragmentEn extends Fragment {
         animalDetailDietTextView = view.findViewById(R.id.animalDetailDietTextView);
         animalDetailSloganTextView = view.findViewById(R.id.animalDetailSloganTextView);
         animalDetailDescriptionTextView = view.findViewById(R.id.animalDetailDescriptionTextView);
+        animalDetailUrlTextView = view.findViewById(R.id.animalDetailUrlTextView);
 
         if (getArguments() != null) {
             String animalName = getArguments().getString("animal_name", "No data");
@@ -58,6 +64,7 @@ public class AnimalDetailsFragmentEn extends Fragment {
             String diet = getArguments().getString("animal_diet", "No data");
             String slogan = getArguments().getString("animal_slogan", "No data");
             String description = getArguments().getString("animal_description", "No data");
+            String url = getArguments().getString("animal_url", "No data");
 
             animalDetailNameTextView.setText(animalName);
             setBoldText(animalDetailLocationsTextView, "Locations: ", locations);
@@ -67,12 +74,23 @@ public class AnimalDetailsFragmentEn extends Fragment {
             setBoldText(animalDetailDietTextView, "Diet: ", diet);
             setBoldText(animalDetailSloganTextView, "Slogan: ", slogan);
             setBoldText(animalDetailDescriptionTextView, "Description: ", description);
+            setBoldText(animalDetailUrlTextView, "For more information: \n", url);
 
             Glide.with(this)
                     .load(imageUrl)
                     .placeholder(R.drawable.noimageavailable)
                     .error(R.drawable.noimageavailable)
                     .into(animalDetailImageView);
+
+            Button copyUrlButton = view.findViewById(R.id.copyUrlButton);
+
+            // Set the action for the copy URL button
+            copyUrlButton.setOnClickListener(v -> {
+                // Copy the URL to the phone
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Animal URL", url);
+                clipboard.setPrimaryClip(clip);
+            });
         }
     }
 

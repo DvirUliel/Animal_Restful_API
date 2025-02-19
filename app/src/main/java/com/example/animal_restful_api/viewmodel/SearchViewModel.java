@@ -2,14 +2,14 @@ package com.example.animal_restful_api.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.MutableLiveData;
-import com.example.animal_restful_api.models.Animal;
+import com.example.animal_restful_api.models.AnimalEn;
 import java.util.List;
 
 public class SearchViewModel extends ViewModel {
-    private final MutableLiveData<List<Animal>> animalList = new MutableLiveData<>();
+    private final MutableLiveData<List<AnimalEn>> animalList = new MutableLiveData<>();
     private final MutableLiveData<String> lastAnimalInfo = new MutableLiveData<>();
 
-    public MutableLiveData<List<Animal>> getAnimalList() {
+    public MutableLiveData<List<AnimalEn>> getAnimalList() {
         return animalList;
     }
 
@@ -17,7 +17,7 @@ public class SearchViewModel extends ViewModel {
         return lastAnimalInfo;
     }
 
-    public void setAnimalList(List<Animal> animals) {
+    public void setAnimalList(List<AnimalEn> animals) {
         animalList.setValue(animals);
     }
 

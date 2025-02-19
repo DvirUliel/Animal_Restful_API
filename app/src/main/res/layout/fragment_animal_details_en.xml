@@ -132,6 +132,37 @@
                     android:textColor="#6D4C41"
                     android:paddingTop="8dp"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_gray"
+                    android:layout_marginVertical="8dp"/>
+
+                <TextView
+                    android:id="@+id/animalDetailUrlTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Url"
+                    android:textSize="18sp"
+                    android:textColor="#6D4C41"
+                    android:paddingTop="8dp"/>
+                <TextView
+                    android:id="@+id/animalDetailShareTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Share wikipedia page!"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#6D4C41"
+                    android:paddingTop="8dp"/>
+                <Button
+                    android:id="@+id/copyUrlButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Copy URL" />
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

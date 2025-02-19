@@ -8,7 +8,7 @@
     android:background="@drawable/gradient_background"
     android:padding="16dp">
 
-    <!-- App Logo or Icon -->
+    <!-- App Logo -->
     <ImageView
         android:layout_width="400dp"
         android:layout_height="400dp"
@@ -16,7 +16,7 @@
         android:contentDescription="App Logo"
         android:layout_marginBottom="30dp"/>
 
-    <!-- Welcome text with a more elegant font and spacing -->
+    <!-- Welcome Text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:fontFamily="@font/dancing_script"
         android:textAlignment="center"/>
 
-    <!-- A brief description about the app -->
+    <!-- Description -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,39 @@
         android:fontFamily="@font/lora"
         android:textStyle="italic"/>
 
-    <!-- Get Started button with rounded corners and shadow -->
+    <!-- Choose Language Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Language:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:paddingBottom="8dp"
+        android:textAlignment="center"/>
+
+    <!-- Language Selector (Clickable with Arrow) -->
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@drawable/spinner_background"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <Spinner
+            android:id="@+id/languageSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:popupBackground="@drawable/spinner_dropdown_background"
+            android:paddingEnd="10dp"/>
+    </LinearLayout>
+
+    <!-- Get Started Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
@@ -55,6 +87,5 @@
         android:paddingVertical="14dp"
         android:elevation="4dp"
         android:stateListAnimator="@animator/hover_effect"/>
-
 
 </LinearLayout>
