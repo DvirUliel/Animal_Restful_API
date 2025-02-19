@@ -1,14 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frsgmentsHE.SearchFragmentHe">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/searchEditTextHe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:hint="🔍 חפש אחר חיה..."
+        android:padding="12dp"
+        android:background="@drawable/rounded_corner"
+        android:textSize="16sp"/>
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/searchButtonHe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="חפש"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/search_button"
+        android:textColor="@android:color/white"/>
+
+    <!-- Use FrameLayout to layer RecyclerView on top of ImageView -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Placeholder ImageView (will be shown when RecyclerView is empty) -->
+        <ImageView
+            android:id="@+id/placeholderImageHe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/search_placeholder"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:visibility="visible" /> <!-- Initially visible -->
+
+        <!-- RecyclerView (will overlay ImageView when populated) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewHe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/> <!-- Initially hidden -->
+
+    </FrameLayout>
+
+</LinearLayout>

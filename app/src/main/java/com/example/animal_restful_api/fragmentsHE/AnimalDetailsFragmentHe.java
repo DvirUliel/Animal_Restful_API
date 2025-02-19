@@ -1,4 +1,4 @@
-package com.example.animal_restful_api.frsgmentsHE;
+package com.example.animal_restful_api.fragmentsHE;
 
 import android.os.Bundle;
 

@@ -6,7 +6,7 @@ public class AnimalEn {
     private String name;
     private String[] locations;
     private Map<String, String> characteristics;
-    private String imageUrl;  // שדה חדש לשמירת קישור התמונה
+    private String imageUrl;
 
     private String description;
     private String pageUrl;
