@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Discover and explore animals easily."
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="#333333"
         android:paddingBottom="40dp"
         android:textAlignment="center"

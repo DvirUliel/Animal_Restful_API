@@ -37,30 +37,38 @@ public class SearchFragmentHe extends Fragment {
         // Initialize the ViewModel
         searchViewModel = new ViewModelProvider(this).get(SearchViewModelHe.class);
 
+        // Inflate the fragment's layout
         View rootView = inflater.inflate(R.layout.fragment_search_he, container, false);
+
+        // Find views by ID
         searchEditText = rootView.findViewById(R.id.searchEditTextHe);
         searchButton = rootView.findViewById(R.id.searchButtonHe);
         recyclerView = rootView.findViewById(R.id.recyclerViewHe);
         placeholderImage = rootView.findViewById(R.id.placeholderImageHe);
 
+        // Set layout manager for RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Initially hide RecyclerView and show placeholder image
         recyclerView.setVisibility(View.GONE);
         placeholderImage.setVisibility(View.VISIBLE);
 
+        // Set up the search button click listener
         searchButton.setOnClickListener(v -> {
             String animalName = searchEditText.getText().toString().trim();
             if (!animalName.isEmpty()) {
+                // If input is not empty, perform the search
                 searchWikipedia(animalName);
             } else {
+                // Show a toast message if no animal name is entered
                 Toast.makeText(getContext(), "נא להזין שם של חיה", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Observe changes in the animal list
+        // Observe changes in the animal list from the ViewModel
         searchViewModel.getAnimalList().observe(getViewLifecycleOwner(), animals -> {
             if (animals != null && !animals.isEmpty()) {
+                // If animals are found, set the adapter and display the list
                 animalAdapter = new AnimalAdapterHe(animals, clickedAnimal -> {
                     // Create a bundle to pass data to the AnimalDetailsFragment
                     Bundle bundle = new Bundle();
@@ -75,31 +83,38 @@ public class SearchFragmentHe extends Fragment {
                     navController.navigate(R.id.action_searchFragmentHe_to_animalDetailsFragmentHe, bundle);
                 });
 
+                // Set the adapter to RecyclerView
                 recyclerView.setAdapter(animalAdapter);
 
                 // Hide placeholder image and show RecyclerView
                 recyclerView.setVisibility(View.VISIBLE);
                 placeholderImage.setVisibility(View.GONE);
             } else {
-                // If no animals found, show the placeholder image
+                // If no animals found, show the placeholder image and a toast message
                 recyclerView.setVisibility(View.GONE);
                 placeholderImage.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "לא נמצאו תוצאות לחיה", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // Return the root view
         return rootView;
     }
 
+    /**
+     * Function to simulate a search in Wikipedia for animals.
+     * It creates a list with the entered animal name and updates the ViewModel.
+     * @param animalName The name of the animal to search for.
+     */
     private void searchWikipedia(String animalName) {
         // Create a new AnimalHe object based on the search input
         AnimalHe animal = new AnimalHe(animalName);
 
-        // Simulate API response
+        // Simulate API response by creating a list and adding the animal
         List<AnimalHe> animalList = new ArrayList<>();
         animalList.add(animal);
 
-        // Update the ViewModel with the search results
+        // Update the ViewModel with the simulated animal list
         searchViewModel.setAnimalList(animalList);
     }
 }
