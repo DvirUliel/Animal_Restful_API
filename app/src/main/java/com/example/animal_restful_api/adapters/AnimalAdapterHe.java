@@ -104,30 +104,28 @@ public class AnimalAdapterHe extends RecyclerView.Adapter<AnimalAdapterHe.Animal
                         String responseData = response.body().string();
                         JSONObject jsonObject = new JSONObject(responseData);
 
-                        // אם יש סיכום, עדכון
-                        if (jsonObject.has("extract")) {
-                            String summary = jsonObject.getString("extract");
-                            animal.setSummary(summary);
+                        String summary = jsonObject.optString("extract", "");
+                        String description = jsonObject.optString("description", "");
+
+                        // Check if the entry is a valid animal
+                        if (!isAnimal(summary) && !isAnimal(description)) {
+                            // Remove from list and update UI
+                            removeInvalidAnimal(animal,holder);
+                            return;
                         }
 
-                        // אם יש תיאור, עדכון
-                        if (jsonObject.has("description")) {
-                            String description = jsonObject.getString("description");
-                            animal.setDescription(description);
-                        }
+                        animal.setSummary(summary);
+                        animal.setDescription(description);
 
-                        // אם יש קישור לדף, עדכון
                         if (jsonObject.has("content_urls")) {
                             String pageUrl = jsonObject.getJSONObject("content_urls").getJSONObject("mobile").getString("page");
                             animal.setPageUrl(pageUrl);
                         }
 
-                        // אם יש תמונה, עדכון
                         if (jsonObject.has("thumbnail")) {
                             String imageUrl = jsonObject.getJSONObject("thumbnail").getString("source");
                             animal.setImageUrl(imageUrl);
 
-                            // עדכון התמונה ב-ImageView
                             imageView.post(() -> Glide.with(imageView.getContext())
                                     .load(imageUrl)
                                     .placeholder(R.drawable.noimageavailable)
@@ -135,9 +133,7 @@ public class AnimalAdapterHe extends RecyclerView.Adapter<AnimalAdapterHe.Animal
                                     .into(imageView));
                         }
 
-                        // עדכון ה-UI צריך לקרות על ת'רד הראשי
                         holder.animalTextView.post(() -> {
-                            // עדכון הטקסט ב-TextView עם כל המידע (שם, תיאור, סיכום)
                             String info = "שם: " + animal.getTitle() + "\nתיאור: " + animal.getDescription();
                             holder.animalTextView.setText(info);
                             lastAnimalInfo = info;
@@ -150,4 +146,42 @@ public class AnimalAdapterHe extends RecyclerView.Adapter<AnimalAdapterHe.Animal
             }
         });
     }
+
+    /**
+     * Removes an invalid animal from the list and refreshes the UI.
+     */
+    private void removeInvalidAnimal(AnimalHe invalidAnimal, AnimalViewHolder holder) {
+        animalList.remove(invalidAnimal);
+
+        // Run UI updates on the main thread
+        holder.itemView.post(() -> {
+            notifyDataSetChanged();
+        });
+    }
+
+
+    /**
+     * פונקציה שבודקת אם המידע מכיל רמזים לכך שמדובר בחיה
+     */
+    private boolean isAnimal(String text) {
+        if (text == null || text.isEmpty()) {
+            return false;
+        }
+
+        String[] animalKeywords = {
+                "בעל חיים", "סוג של", "ממשפחת", "סוג במשפחת", "יונק", "זוחל", "דג", "עוף", "חרק",
+                "דו-חיים", "טורף", "תת-מין", "צמחוני", "חי", "חיית מחמד", "חיית טרף", "מינים",
+                "מערכת בעלי חיים", "תת-מינים", "סדרה", "מיני בעלי חיים", "הסוג", "המשפחות",
+                "מינים שונים", "חיות", "המשפחתיים", "עולמם של בעלי חיים", "מערכת בעלי חיים"
+        };
+
+        for (String keyword : animalKeywords) {
+            if (text.contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="Url"
                     android:textSize="18sp"
-                    android:singleLine="true"
+                    android:autoLink="web"
                     android:textColor="#6D4C41"
                     android:paddingTop="8dp"/>
 

@@ -96,10 +96,10 @@
                     android:id="@+id/animalDetailUrlTextViewHe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="קישור"
+                    android:text="למעבר לאתר ויקיפדיה"
                     android:textSize="18sp"
                     android:textColor="#6D4C41"
-                    android:singleLine="true"
+                    android:autoLink="web"
                     android:paddingTop="8dp"/>
 
                 <View
