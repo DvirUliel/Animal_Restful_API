@@ -21,7 +21,7 @@ import com.example.animal_restful_api.adapters.AnimalAdapterEn;
 import com.example.animal_restful_api.api.ApiService;
 import com.example.animal_restful_api.api.RetrofitClient;
 import com.example.animal_restful_api.models.AnimalEn;
-import com.example.animal_restful_api.viewmodel.SearchViewModel;
+import com.example.animal_restful_api.viewmodel.SearchViewModelEn;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,13 +33,13 @@ public class SearchFragmentEn extends Fragment {
     private AnimalAdapterEn animalAdapter;
     private EditText searchEditText;
     private Button searchButton;
-    private SearchViewModel searchViewModel;
+    private SearchViewModelEn searchViewModel;
     private ImageView placeholderImage; // Add reference to placeholder image
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Initialize the ViewModel
-        searchViewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        searchViewModel = new ViewModelProvider(this).get(SearchViewModelEn.class);
 
         View rootView = inflater.inflate(R.layout.fragment_search_en, container, false);
         searchEditText = rootView.findViewById(R.id.searchEditText);

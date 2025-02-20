@@ -1,66 +1,83 @@
 package com.example.animal_restful_api.fragmentsHE;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import com.bumptech.glide.Glide;
 import com.example.animal_restful_api.R;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.graphics.Typeface;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AnimalDetailsFragmentHe#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AnimalDetailsFragmentHe extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ImageView animalDetailImageViewHe;
+    private TextView animalDetailNameTextViewHe;
+    private TextView animalDetailDescriptionTextViewHe;
+    private TextView animalDetailSummaryTextViewHe;
+    private TextView animalDetailUrlTextViewHe;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AnimalDetailsFragmentHe() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AnimalDetailsFragmentHe.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AnimalDetailsFragmentHe newInstance(String param1, String param2) {
-        AnimalDetailsFragmentHe fragment = new AnimalDetailsFragmentHe();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_animal_details_he, container, false);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        animalDetailImageViewHe = view.findViewById(R.id.animalDetailImageViewHe);
+        animalDetailNameTextViewHe = view.findViewById(R.id.animalDetailNameTextViewHe);
+        animalDetailDescriptionTextViewHe = view.findViewById(R.id.animalDetailDescriptionTextViewHe);
+        animalDetailSummaryTextViewHe = view.findViewById(R.id.animalDetailSummaryTextViewHe);
+        animalDetailUrlTextViewHe = view.findViewById(R.id.animalDetailUrlTextViewHe);
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            String animalName = getArguments().getString("animal_name", "No data");
+            String imageUrl = getArguments().getString("animal_image_url", "");
+            String summary = getArguments().getString("animal_summary", "No data");
+            String description = getArguments().getString("animal_description", "No data");
+            String url = getArguments().getString("animal_url", "No data");
+
+            animalDetailNameTextViewHe.setText(animalName);
+            setBoldText(animalDetailDescriptionTextViewHe, "תיאור: ", description);
+            setBoldText(animalDetailSummaryTextViewHe, "אודות: ", summary);
+            setBoldText(animalDetailUrlTextViewHe, "למידע נוסף: ", url);
+
+            Glide.with(this)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.noimageavailable)
+                    .error(R.drawable.noimageavailable)
+                    .into(animalDetailImageViewHe);
+
+            Button copyUrlButton = view.findViewById(R.id.copyUrlButtonHe);
+
+            // Set the action for the copy URL button
+            copyUrlButton.setOnClickListener(v -> {
+                // Copy the URL to the phone
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Animal URL", url);
+                clipboard.setPrimaryClip(clip);
+            });
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_animal_details_he, container, false);
+    private void setBoldText(TextView textView, String label, String value) {
+        SpannableString spannableString = new SpannableString(label + value);
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
     }
 }
+

@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragmentEn_to_searchFragmentEn"
             app:destination="@id/searchFragmentEn" />
+        <action
+            android:id="@+id/action_homeFragmentEn_to_searchFragmentHe"
+            app:destination="@id/searchFragmentHe" />
     </fragment>
 
     <fragment
@@ -30,4 +33,19 @@
         android:label="Animal Details Fragment"
         tools:layout="@layout/fragment_animal_details_en" />
 
+    <fragment
+        android:id="@+id/searchFragmentHe"
+        android:name="com.example.animal_restful_api.fragmentsHE.SearchFragmentHe"
+        android:label="Search Fragment"
+        tools:layout="@layout/fragment_search_he" >
+        <action
+            android:id="@+id/action_searchFragmentHe_to_animalDetailsFragmentHe"
+            app:destination="@id/animalDetailsFragmentHe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/animalDetailsFragmentHe"
+        android:name="com.example.animal_restful_api.fragmentsHE.AnimalDetailsFragmentHe"
+        android:label="Animal Details Fragment"
+        tools:layout="@layout/fragment_animal_details_he" />
 </navigation>

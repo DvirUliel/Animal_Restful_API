@@ -51,7 +51,7 @@ public class HomeFragmentEn extends Fragment {
             }
             else {
                 // Navigate to the Hebrew search fragment
-//                Navigation.findNavController(view).navigate(R.id.action_homeFragmentEn_to_searchFragmentHe);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragmentEn_to_searchFragmentHe);
             }
         });
 

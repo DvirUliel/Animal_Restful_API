@@ -7,6 +7,19 @@ public class AnimalHe {
     private String description;
     private String summary;
 
+    // Constructor for just the title (used for search)
+    public AnimalHe(String title) {
+        this.title = title;
+    }
+    // Constructor with all fields (for creating a full object after API response)
+    public AnimalHe(String title, String imageUrl, String pageUrl, String description, String summary) {
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.pageUrl = pageUrl;
+        this.description = description;
+        this.summary = summary;
+    }
+
     public String getTitle() {
         return title;
     }
